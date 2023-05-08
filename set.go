@@ -1,4 +1,6 @@
-// Set
+// Package set ...
+// TODO:
+//   - think about efficiency
 package set
 
 import (
@@ -43,6 +45,32 @@ func Contains[T comparable](s []T, e T) bool {
 		}
 	}
 	return false
+}
+
+// Equal compares the unique elements of two slices and returns true if all
+// elements are contained in both slices.
+// Ignores non-unique elements.
+func Equal[T comparable](s1, s2 []T) bool {
+	m1 := make(map[T]struct{}, len(s1))
+	for _, e := range s1 {
+		m1[e] = struct{}{}
+	}
+	m2 := make(map[T]struct{}, len(s2))
+	for _, e := range s2 {
+		m2[e] = struct{}{}
+	}
+
+	if len(m1) != len(m2) {
+		return false
+	}
+
+	for e := range m1 {
+		if _, exists := m2[e]; !exists {
+			return false
+		}
+	}
+
+	return true
 }
 
 func max(x, y int) int {
