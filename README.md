@@ -1,2 +1,5 @@
 # go-set
-Yet another set implementation for Go.
+
+Yet another set implementation in Go.
+
+
